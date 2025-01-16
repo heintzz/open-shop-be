@@ -20,10 +20,14 @@ class ProductList(APIView):
 
     def get(self, request):
         name = request.query_params.get("name")
+        location = request.query_params.get("location")
+
         product = Product.objects.all()
 
         if name:
             product = product.filter(name__icontains=name)
+        if location:
+            product = product.filter(location=location)
 
         serializer = ProductSerializer(
             product, many=True, context={'request': request})
