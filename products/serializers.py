@@ -12,7 +12,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
                   'location', 'price', 'discount', 'category',
                   'stock', 'is_available', 'picture', '_links']
 
-    def get__links(self, _):
+    def get__links(self, obj):
         request = self.context.get('request')
         return [
             {
