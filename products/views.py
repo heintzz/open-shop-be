@@ -36,6 +36,15 @@ class ProductDetail(APIView):
         serializer = ProductSerializer(product)
         return Response(serializer.data)
 
+    def put(self, request, id):
+        product = self.get_object(id)
+        serializer = ProductSerializer(
+            product, data=request.data,  context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def get_object(self, id):
         try:
             return Product.objects.get(pk=id)
