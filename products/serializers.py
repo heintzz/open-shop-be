@@ -13,12 +13,19 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
                   'stock', 'is_available', 'picture', '_links']
 
     def get__links(self, obj):
+        print(obj)
         request = self.context.get('request')
         return [
             {
                 "rel": "self",
-                "href": reverse('product-list'),
+                "href": reverse('product-list', request=request),
                 "action": "POST",
                 "types": ["application/json"]
             },
+            {
+                "rel": "self",
+                "href": reverse('product-detail', kwargs={"id": obj.pk}, request=request),
+                "action": "GET",
+                "types": ["application/json"]
+            }
         ]
