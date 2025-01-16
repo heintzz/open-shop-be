@@ -19,7 +19,12 @@ class ProductList(APIView):
         return Response(product.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
+        name = request.query_params.get("name")
         product = Product.objects.all()
+
+        if name:
+            product = product.filter(name__icontains=name)
+
         serializer = ProductSerializer(
             product, many=True, context={'request': request})
         return Response({"products": serializer.data}, status=status.HTTP_200_OK)

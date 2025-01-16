@@ -33,5 +33,11 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
                 "href": reverse('product-detail', kwargs={"id": obj.pk}, request=request),
                 "action": "PUT",
                 "types": ["application/json"]
+            },
+            {
+                "rel": "self",
+                "href": reverse('product-detail', kwargs={"id": obj.pk}, request=request),
+                "action": "DELETE",
+                "types": ["application/json"]
             }
         ]
