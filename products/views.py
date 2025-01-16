@@ -66,7 +66,8 @@ class ProductDetail(APIView):
                 {"error": "Product not found"},
                 status=status.HTTP_404_NOT_FOUND
             )
-        product.delete()
+        product.is_delete = True
+        product.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def get_object(self, id):

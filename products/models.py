@@ -14,3 +14,4 @@ class Product(models.Model):
   stock = models.IntegerField()
   is_available = models.BooleanField(default=True)
   picture = models.URLField(max_length=2048)
+  is_delete = models.BooleanField(default=False)

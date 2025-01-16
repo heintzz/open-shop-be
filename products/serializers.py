@@ -10,7 +10,8 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         model = Product
         fields = ['id', 'name', 'sku', 'description', 'shop',
                   'location', 'price', 'discount', 'category',
-                  'stock', 'is_available', 'picture', '_links']
+                  'stock', 'is_available', 'picture', 'is_delete',
+                  '_links']
 
     def get__links(self, obj):
         print(obj)
